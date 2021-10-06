@@ -4,7 +4,13 @@ const empty = document.querySelector('#empty');
 const usernameElement = document.querySelector('#username');
 
 async function getUser() {
-    // TODO
+    const res = await fetch('http://localhost:4280/.auth/me');
+    const info_user = await res.json();
+    console.log(info_user);
+    if (!info_user.clientPrincipal.userDetails)
+        document.getElementById('username').innerHTML = "Profile";
+    else
+        document.getElementById('username').innerHTML = `Hi, ${info_user.clientPrincipal.userDetails}`;
 }
 
 async function updateTask() {
